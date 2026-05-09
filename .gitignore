@@ -1,0 +1,20 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# Future app dependencies/build outputs
+node_modules/
+dist/
+build/
+.expo/
+.gradle/
+android/.gradle/
+android/build/
+app/build/
