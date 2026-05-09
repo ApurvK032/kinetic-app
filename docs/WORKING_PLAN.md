@@ -19,17 +19,15 @@ Deliverables:
 - Gemma extraction prompt.
 - Updated project context and agent log.
 
-Status: in progress.
+Status: complete.
 
 ## Phase 1: Platform Spike
 
 Goal: choose the Android implementation path.
 
-Options to compare:
+Decision:
 
-- Native Android with Kotlin/Jetpack Compose.
-- React Native with Expo development build.
-- PWA for early prototype, then Android later.
+- Use native Android with Kotlin and Jetpack Compose for the MVP.
 
 Decision criteria:
 
@@ -39,17 +37,19 @@ Decision criteria:
 - Ease of building Today and checklist flows.
 - Future widget support.
 
-Recommended likely path:
+Current implementation:
 
-- Native Android or React Native with a native Android module for on-device model inference.
-- Use Google AI Edge / MediaPipe LLM Inference for Gemma tests.
+- Native Android scaffold created.
+- Milestone 1 static Compose UI created.
+- Gradle debug build passes.
 
 Deliverables:
 
-- One-page decision note.
-- Hello-world app.
-- Voice capture spike.
-- Gemma 3 1B or Gemma 3n E2B inference spike on Pixel 7a.
+- Native Android scaffold. Done.
+- Today/Fitness/Diet/Plan/Stats UI. Done.
+- Phone install smoke test. Next.
+- Voice capture spike. Later.
+- Gemma 3 1B or Gemma 3n E2B inference spike on Pixel 7a. Later.
 
 ## Phase 2: Local Data Foundation
 
@@ -153,8 +153,11 @@ No external integrations required.
 
 ## Recommended Next Step
 
-Push the documentation-first idea repo to GitHub, then do a small Android spike to test:
+Install the current debug build on the Pixel 7a and smoke test the navigation/UI:
 
-- microphone capture.
-- local storage.
-- Gemma inference latency on Pixel 7a.
+- enable Developer options and USB debugging.
+- connect the phone.
+- run `adb devices`.
+- run `.\gradlew.bat installDebug`.
+
+After the UI smoke test, continue with local data foundation and manual logging.

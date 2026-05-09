@@ -20,3 +20,18 @@
 - Commands run: checked for GitHub CLI; initialized git; committed docs; tried `git ls-remote https://github.com/ApurvK032/kinetic.git`.
 - Decisions made: use local `main` branch and commit message `Document Kinetic MVP concept`.
 - Unresolved issues: GitHub CLI is not installed; `ApurvK032/kinetic` was not accessible or does not exist, so push needs an existing remote URL or repo creation through GitHub.
+
+## 2026-05-09 14:39 -05:00
+- User goal: push to the provided GitHub repo `https://github.com/ApurvK032/kinetic-app`.
+- Files changed: amended previous docs commit to include the latest log note.
+- Commands run: added `origin`, amended commit, pushed `main`.
+- Decisions made: use `origin/main` for the project.
+- Result: pushed commit `710f30b Document Kinetic MVP concept`.
+
+## 2026-05-09 15:17 -05:00
+- User goal: install the required Android build tooling on this PC and build Milestone 1 app UI.
+- Files changed: added native Android/Kotlin/Compose scaffold, Gradle wrapper, app manifest/resources, sample domain models/data, Compose UI/theme, and updated docs/context.
+- Commands run: installed JDK 17 and Android Studio with `winget`; installed Android SDK command-line tools, platform-tools, Android 35 platform, and build-tools; generated Gradle wrapper; ran `.\gradlew.bat assembleDebug` twice.
+- Decisions made: proceed with native Android/Kotlin/Jetpack Compose; keep Milestone 1 static and Today-first with tabs for Today, Fitness, Diet, Plan, and Stats.
+- Result: debug build succeeded; APK generated at `app/build/outputs/apk/debug/app-debug.apk`.
+- Unresolved issues: no phone install smoke test yet; local database, real logging, voice capture, Gemma extraction, and calculations are not implemented.

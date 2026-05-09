@@ -64,7 +64,38 @@ The MVP should include:
 
 ## Current Status
 
-This repository is documentation-first. No app code has been written yet.
+This repository now includes a native Android/Kotlin/Jetpack Compose scaffold and Milestone 1 UI. The current app is a static prototype for the Today-first flow:
+
+- Today.
+- Fitness.
+- Diet.
+- Plan.
+- Stats.
+
+The debug APK builds successfully.
+
+## Build Commands
+
+Requirements already used for local setup:
+
+- JDK 17.
+- Android Studio.
+- Android SDK command-line tools.
+- Android SDK Platform 35.
+- Android SDK Build Tools 35.
+
+Build:
+
+```powershell
+.\gradlew.bat assembleDebug
+```
+
+Install on a connected Android phone with USB debugging enabled:
+
+```powershell
+adb devices
+.\gradlew.bat installDebug
+```
 
 Start here:
 

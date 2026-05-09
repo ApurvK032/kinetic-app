@@ -1,6 +1,6 @@
 # Folder Structure
 
-This repository is currently an idea and planning repo. The structure should stay light until the Android stack is chosen.
+This repository now contains a native Android/Kotlin/Jetpack Compose scaffold plus planning docs.
 
 ## Current Repository Structure
 
@@ -10,6 +10,28 @@ Kinetic-Fitness-App/
   AGENTS.md
   PROJECT_CONTEXT.md
   AGENT_LOG.md
+  settings.gradle.kts
+  build.gradle.kts
+  gradle.properties
+  gradlew
+  gradlew.bat
+  app/
+    build.gradle.kts
+    src/main/
+      AndroidManifest.xml
+      java/com/apurvk/kinetic/
+        MainActivity.kt
+        data/sample/
+          SampleKineticData.kt
+        domain/model/
+          KineticModels.kt
+        ui/
+          KineticApp.kt
+          theme/KineticTheme.kt
+      res/
+        drawable/ic_launcher.xml
+        values/
+        xml/
   docs/
     MVP_PRD.md
     WORKING_PLAN.md
@@ -21,7 +43,7 @@ Kinetic-Fitness-App/
 
 ## Planned App Structure
 
-Once implementation starts, use an app folder and keep product logic separate from screens.
+As implementation grows, keep product logic separate from screens.
 
 ```text
 Kinetic-Fitness-App/

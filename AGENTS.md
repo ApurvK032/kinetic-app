@@ -4,21 +4,32 @@
 Kinetic is a personal fitness, diet, and recovery tracking app for the user's 3-4 month fat-loss and conditioning goal. The core idea is low-friction logging through a home-screen widget with two main actions: Exercise and Diet. The user taps one, speaks naturally, and the app turns that into structured logs and progress summaries.
 
 ## Tech Stack
-Not chosen yet. Current direction:
-- Android-first MVP, targeting Pixel 7a for early testing.
-- App options: native Android/Kotlin with Jetpack Compose, or React Native with native Android modules.
-- Storage: local-first database for MVP; sync/backend later if needed.
-- AI: speech-to-text plus on-device Gemma for structured extraction.
+Current stack:
+- Native Android app.
+- Kotlin.
+- Jetpack Compose and Material 3.
+- Gradle wrapper `8.10.2`.
+- Android Gradle Plugin `8.7.3`.
+- Compile/target SDK 35; min SDK 26.
+- Local-first storage planned for MVP; sync/backend later if needed.
+- AI planned: speech-to-text plus on-device Gemma for structured extraction.
 - Candidate models: Gemma 3 1B int4 first; Gemma 3n E2B as stronger experiment.
 - Integrations later: Strava, Health Connect/Google Fit, NoiseFit export/sync if practical.
 
 ## Commands
-- No setup command yet.
-- No run command yet.
-- No test command yet.
+- Build debug APK: `.\gradlew.bat assembleDebug`
+- Check connected devices: `adb devices`
+- Install debug APK on connected phone: `.\gradlew.bat installDebug`
+- Debug APK output: `app/build/outputs/apk/debug/app-debug.apk`
+- No automated test suite yet.
 
 ## Important Files
 - `README.md`: GitHub-facing project overview.
+- `settings.gradle.kts`, `build.gradle.kts`, `app/build.gradle.kts`: Android Gradle project.
+- `app/src/main/java/com/apurvk/kinetic/MainActivity.kt`: Android entry point.
+- `app/src/main/java/com/apurvk/kinetic/ui/KineticApp.kt`: Milestone 1 Compose UI.
+- `app/src/main/java/com/apurvk/kinetic/data/sample/SampleKineticData.kt`: static sample data for UI prototype.
+- `app/src/main/java/com/apurvk/kinetic/domain/model/KineticModels.kt`: first UI/domain models.
 - `PROJECT_CONTEXT.md`: full product, fitness, cycling, diet, and logging context.
 - `AGENT_LOG.md`: dated project work log.
 - `AGENTS.md`: durable project instructions for future Codex sessions.
@@ -39,7 +50,9 @@ Not chosen yet. Current direction:
 - The weekly activity plan is 5 cycling days plus 2 strength days.
 
 ## Known Issues
-- Final app platform and database are not selected.
+- Local database is not selected/implemented yet.
+- Milestone 1 UI uses static sample data only.
+- Voice logging, Gemma extraction, and real calculations are not implemented yet.
 - Pixel 7a on-device Gemma performance needs a real spike before committing to the model.
 - Strava/Health Connect/NoiseFit integration feasibility is not yet verified.
 - Native home-screen widgets cannot always capture voice directly; MVP may need widget tap -> tiny voice capture screen -> save.

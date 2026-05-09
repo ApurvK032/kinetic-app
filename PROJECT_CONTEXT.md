@@ -365,7 +365,10 @@ Other names considered:
 - The app should encourage sustainable fat loss, not aggressive restriction.
 
 ## Current Build Status
-- Project scaffold exists with documentation only.
+- Native Android/Kotlin/Jetpack Compose scaffold exists.
+- Milestone 1 static UI exists for Today, Fitness, Diet, Plan, and Stats.
+- Local build tooling was installed on the PC: JDK 17, Android Studio, Android SDK command-line tools, platform-tools/ADB, Android 35 platform, and build tools.
 - GitHub-facing README, MVP PRD, working plan, folder structure, data model, and Gemma prompt docs have been added.
-- No app code has been written.
-- Next step is initializing git/pushing the idea repo, then choosing Android stack and running a Pixel 7a inference spike.
+- Debug build succeeds with `.\gradlew.bat assembleDebug`.
+- Debug APK output: `app/build/outputs/apk/debug/app-debug.apk`.
+- Next step is installing the debug APK on the Pixel 7a for a UI smoke test, then building local data/manual logging.

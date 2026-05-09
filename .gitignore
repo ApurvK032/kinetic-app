@@ -10,11 +10,13 @@ tmp/
 temp/
 
 # Future app dependencies/build outputs
+local.properties
 node_modules/
 dist/
 build/
 .expo/
 .gradle/
+app/.gradle/
 android/.gradle/
 android/build/
 app/build/
