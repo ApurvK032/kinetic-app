@@ -35,3 +35,11 @@
 - Decisions made: proceed with native Android/Kotlin/Jetpack Compose; keep Milestone 1 static and Today-first with tabs for Today, Fitness, Diet, Plan, and Stats.
 - Result: debug build succeeded; APK generated at `app/build/outputs/apk/debug/app-debug.apk`.
 - Unresolved issues: no phone install smoke test yet; local database, real logging, voice capture, Gemma extraction, and calculations are not implemented.
+
+## 2026-05-09 21:55 -05:00
+- User goal: implement the next milestone: local data, real manual meal logging, gym checklist logging, cooked batches, and simple estimates.
+- Files changed: added Room/KSP dependencies; added Room entities, DAO, database, repository, nutrition estimator, fitness estimator, workout templates, ViewModel, and replaced the static Compose UI with local-data-backed screens; updated docs/context.
+- Commands run: `.\gradlew.bat assembleDebug`; stopped Gradle and removed generated `app/build` after a OneDrive file-lock failure; reran `.\gradlew.bat assembleDebug`; ran `.\gradlew.bat installDebug`; launched app with `adb shell monkey`; checked recent logcat for fatal crashes.
+- Decisions made: keep Gemma/voice out of this milestone; use Room for local persistence; use known-food keyword estimates for protein/calories and MET-style cardio estimates for burn.
+- Result: build succeeded, app installed and launched on Pixel 7a with no fatal crash found in the launch log.
+- Unresolved issues: estimates are rough and keyword-based; edit flows are delete/re-add only; no voice capture, Gemma extraction, user profile, tests, or Health Connect/Strava integration yet.

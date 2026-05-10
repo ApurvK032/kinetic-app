@@ -12,6 +12,7 @@ Current stack:
 - Android Gradle Plugin `8.7.3`.
 - Compile/target SDK 35; min SDK 26.
 - Local-first storage planned for MVP; sync/backend later if needed.
+- Room local database is implemented for meals, gym logs, cardio sessions, and cooked batches.
 - AI planned: speech-to-text plus on-device Gemma for structured extraction.
 - Candidate models: Gemma 3 1B int4 first; Gemma 3n E2B as stronger experiment.
 - Integrations later: Strava, Health Connect/Google Fit, NoiseFit export/sync if practical.
@@ -28,6 +29,12 @@ Current stack:
 - `settings.gradle.kts`, `build.gradle.kts`, `app/build.gradle.kts`: Android Gradle project.
 - `app/src/main/java/com/apurvk/kinetic/MainActivity.kt`: Android entry point.
 - `app/src/main/java/com/apurvk/kinetic/ui/KineticApp.kt`: Milestone 1 Compose UI.
+- `app/src/main/java/com/apurvk/kinetic/ui/KineticViewModel.kt`: local UI state and save/delete actions.
+- `app/src/main/java/com/apurvk/kinetic/data/local/`: Room entities, DAO, and database.
+- `app/src/main/java/com/apurvk/kinetic/data/repository/`: local repository wrapper.
+- `app/src/main/java/com/apurvk/kinetic/domain/nutrition/NutritionEstimator.kt`: rough known-food estimates.
+- `app/src/main/java/com/apurvk/kinetic/domain/fitness/FitnessEstimator.kt`: rough cardio burn estimates.
+- `app/src/main/java/com/apurvk/kinetic/domain/workout/WorkoutTemplates.kt`: Strength A/B templates.
 - `app/src/main/java/com/apurvk/kinetic/data/sample/SampleKineticData.kt`: static sample data for UI prototype.
 - `app/src/main/java/com/apurvk/kinetic/domain/model/KineticModels.kt`: first UI/domain models.
 - `PROJECT_CONTEXT.md`: full product, fitness, cycling, diet, and logging context.
@@ -50,9 +57,9 @@ Current stack:
 - The weekly activity plan is 5 cycling days plus 2 strength days.
 
 ## Known Issues
-- Local database is not selected/implemented yet.
-- Milestone 1 UI uses static sample data only.
-- Voice logging, Gemma extraction, and real calculations are not implemented yet.
+- UI is now backed by local Room data for meals, gym, cardio, and batches.
+- Nutrition and burn estimates are simple known-food/MET approximations and need editing/calibration later.
+- Voice logging and Gemma extraction are not implemented yet.
 - Pixel 7a on-device Gemma performance needs a real spike before committing to the model.
 - Strava/Health Connect/NoiseFit integration feasibility is not yet verified.
 - Native home-screen widgets cannot always capture voice directly; MVP may need widget tap -> tiny voice capture screen -> save.

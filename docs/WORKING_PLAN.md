@@ -57,15 +57,15 @@ Goal: create the storage model before making screens fancy.
 
 Deliverables:
 
-- Local database.
+- Local database. Done with Room.
 - Seed data:
-  - Strength A.
-  - Strength B.
+  - Strength A. Done as templates.
+  - Strength B. Done as templates.
   - common foods.
-  - MET values.
-  - default meal sections.
-- Deterministic nutrition calculator.
-- Deterministic exercise burn calculator.
+  - MET values. Done as simple estimator constants.
+  - default meal sections. Done.
+- Deterministic nutrition calculator. First rough version done.
+- Deterministic exercise burn calculator. First rough version done.
 
 ## Phase 3: Today and Manual Logging
 
@@ -73,14 +73,22 @@ Goal: make the app useful without AI.
 
 Deliverables:
 
-- Today screen.
-- Manual cardio log.
-- Gym checklist for Strength A/B.
-- Meal sections for Diet > Eat.
-- Cooked batch and current week plan.
-- Daily summary.
+- Today screen. Done.
+- Manual cardio log. Done.
+- Gym checklist for Strength A/B. Done.
+- Meal sections for Diet > Eat. Done.
+- Cooked batch and current week plan. First version done.
+- Daily summary. First version done.
 
 This phase proves the product shape even if Gemma is not ready.
+
+Current remaining work:
+
+- Better edit flows instead of delete/re-add.
+- Improve defaults and food estimate calibration.
+- Add persistent user profile defaults.
+- Add empty-state onboarding hints.
+- Add basic automated tests.
 
 ## Phase 4: Voice and Gemma Extraction
 
@@ -160,4 +168,4 @@ Install the current debug build on the Pixel 7a and smoke test the navigation/UI
 - run `adb devices`.
 - run `.\gradlew.bat installDebug`.
 
-After the UI smoke test, continue with local data foundation and manual logging.
+After the manual logging smoke test, continue with edit flows, better estimates, and voice capture.

@@ -72,7 +72,17 @@ This repository now includes a native Android/Kotlin/Jetpack Compose scaffold an
 - Plan.
 - Stats.
 
-The debug APK builds successfully.
+Milestone 2 adds local-first manual tracking:
+
+- Room database persistence.
+- Manual meal logs by section.
+- Rough food protein/calorie estimates for common foods.
+- Manual cardio logs with estimated burn.
+- Strength A/B checklist drafts saved as gym logs.
+- Cooked batch planning.
+- Delete actions for saved logs.
+
+The debug APK builds, installs, and launches on Pixel 7a.
 
 ## Build Commands
 

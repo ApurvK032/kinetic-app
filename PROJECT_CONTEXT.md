@@ -366,9 +366,16 @@ Other names considered:
 
 ## Current Build Status
 - Native Android/Kotlin/Jetpack Compose scaffold exists.
-- Milestone 1 static UI exists for Today, Fitness, Diet, Plan, and Stats.
+- Milestone 2 local manual logging exists for Today, Fitness, Diet, Plan, and Stats.
+- Room stores meal logs, gym exercise logs, cardio sessions, and cooked batches locally.
+- Diet logs can be added by meal section and deleted.
+- Cardio logs can be added manually with estimated burn and deleted.
+- Gym Strength A/B draft checklists can be saved and deleted.
+- Cooked batches can be added and deleted.
+- Simple estimators calculate rough calories/protein from known food keywords and cardio burn from MET-style estimates.
 - Local build tooling was installed on the PC: JDK 17, Android Studio, Android SDK command-line tools, platform-tools/ADB, Android 35 platform, and build tools.
 - GitHub-facing README, MVP PRD, working plan, folder structure, data model, and Gemma prompt docs have been added.
 - Debug build succeeds with `.\gradlew.bat assembleDebug`.
 - Debug APK output: `app/build/outputs/apk/debug/app-debug.apk`.
-- Next step is installing the debug APK on the Pixel 7a for a UI smoke test, then building local data/manual logging.
+- Debug APK has been installed and launched on the Pixel 7a.
+- Next step is testing the manual logging UX on phone, then improving edit flows and adding voice capture.
