@@ -58,6 +58,7 @@ Current stack:
 
 ## Known Issues
 - UI is now backed by local Room data for meals, gym, cardio, and batches.
+- Meal logging uses quick checkbox options plus an "Other / notes" field at the bottom; speech buttons are visible placeholders only.
 - Nutrition and burn estimates are simple known-food/MET approximations and need editing/calibration later.
 - Voice logging and Gemma extraction are not implemented yet.
 - Pixel 7a on-device Gemma performance needs a real spike before committing to the model.

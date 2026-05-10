@@ -76,6 +76,8 @@ Milestone 2 adds local-first manual tracking:
 
 - Room database persistence.
 - Manual meal logs by section.
+- Checkbox-first meal logging with an "Other / notes" field at the bottom.
+- Visible speech input placeholders for future voice logging.
 - Rough food protein/calorie estimates for common foods.
 - Manual cardio logs with estimated burn.
 - Strength A/B checklist drafts saved as gym logs.

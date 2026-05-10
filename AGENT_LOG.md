@@ -43,3 +43,10 @@
 - Decisions made: keep Gemma/voice out of this milestone; use Room for local persistence; use known-food keyword estimates for protein/calories and MET-style cardio estimates for burn.
 - Result: build succeeded, app installed and launched on Pixel 7a with no fatal crash found in the launch log.
 - Unresolved issues: estimates are rough and keyword-based; edit flows are delete/re-add only; no voice capture, Gemma extraction, user profile, tests, or Health Connect/Strava integration yet.
+
+## 2026-05-09 22:01 -05:00
+- User goal: replace plain meal log text boxes with checkbox options and keep text input only for "Other"; add speech option UI but do not make speech functional yet.
+- Files changed: updated `KineticApp.kt`; updated README/project context/agent notes.
+- Commands run: `.\gradlew.bat assembleDebug`; `.\gradlew.bat installDebug`; launched app with `adb shell monkey`; checked recent logcat for fatal crashes.
+- Decisions made: meal logging now uses section-specific checkbox choices, an "Other / notes" field at the bottom, and a disabled speech placeholder; cardio and cooked batch dialogs also show the speech placeholder.
+- Result: build succeeded, installed on Pixel 7a, and launched without fatal crash.

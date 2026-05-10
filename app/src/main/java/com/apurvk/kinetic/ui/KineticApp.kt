@@ -7,6 +7,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -22,6 +24,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.DirectionsBike
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
@@ -60,7 +63,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -93,6 +98,15 @@ private val mealSections = listOf(
     "Lunch",
     "Dinner",
     "Extras"
+)
+
+private val defaultMealChoices = mapOf(
+    "Pre-workout fruit" to listOf("banana", "water", "apple", "orange", "dates"),
+    "Tea / drinks" to listOf("tea", "milk", "coffee", "water", "protein shake"),
+    "Breakfast" to listOf("protein shake", "paneer sandwich", "poha", "sprouts", "dahi", "banana"),
+    "Lunch" to listOf("2 rotis", "chhole", "rajma", "dal", "dahi", "salad", "soy chunks", "paneer"),
+    "Dinner" to listOf("2 rotis", "rajma", "dal", "chhole", "dahi", "salad", "paneer", "soy chunks"),
+    "Extras" to listOf("sweet corn", "nuts", "milk", "maggi", "pasta", "sewai", "protein shake", "fruit")
 )
 
 @Composable
@@ -1048,34 +1062,109 @@ private fun CompactField(
 }
 
 @Composable
+private fun SpeechInputPlaceholder() {
+    OutlinedButton(
+        onClick = {},
+        enabled = false,
+        shape = RoundedCornerShape(8.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Icon(Icons.Outlined.Mic, contentDescription = null, modifier = Modifier.size(18.dp))
+        Spacer(modifier = Modifier.width(8.dp))
+        Text("Speech input coming soon")
+    }
+}
+
+@Composable
+private fun CheckboxRow(
+    text: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(1.dp, KineticColors.Line, RoundedCornerShape(8.dp))
+            .clickable { onCheckedChange(!checked) }
+            .padding(horizontal = 10.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = text,
+            color = KineticColors.Ink,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+@Composable
 private fun MealLogDialog(
     section: String,
     onDismiss: () -> Unit,
     onSave: (String) -> Unit
 ) {
-    var description by rememberSaveable { mutableStateOf("") }
+    val selectedOptions = remember(section) { mutableStateListOf<String>() }
+    var otherText by rememberSaveable(section) { mutableStateOf("") }
+    val choices = defaultMealChoices[section].orEmpty()
+    val description = buildMealDescription(selectedOptions, otherText)
 
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Log $section") },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier
+                    .heightIn(max = 520.dp)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                SpeechInputPlaceholder()
                 Text(
-                    text = "Example: 2 rotis, chhole, dahi, salad",
+                    text = "Choose quick items, then add anything missing at the bottom.",
                     color = KineticColors.Muted,
                     style = MaterialTheme.typography.bodySmall
                 )
+                choices.forEach { choice ->
+                    CheckboxRow(
+                        text = choice.titleCase(),
+                        checked = selectedOptions.contains(choice),
+                        onCheckedChange = { checked ->
+                            if (checked) {
+                                selectedOptions.add(choice)
+                            } else {
+                                selectedOptions.remove(choice)
+                            }
+                        }
+                    )
+                }
                 OutlinedTextField(
-                    value = description,
-                    onValueChange = { description = it },
-                    label = { Text("What did you eat?") },
-                    minLines = 3,
+                    value = otherText,
+                    onValueChange = { otherText = it },
+                    label = { Text("Other / notes") },
+                    minLines = 2,
                     modifier = Modifier.fillMaxWidth()
                 )
+                if (description.isNotBlank()) {
+                    Text(
+                        text = "Will save: $description",
+                        color = KineticColors.Moss,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
             }
         },
         confirmButton = {
-            Button(onClick = { onSave(description) }, shape = RoundedCornerShape(8.dp)) {
+            Button(
+                onClick = { onSave(description) },
+                enabled = description.isNotBlank(),
+                shape = RoundedCornerShape(8.dp)
+            ) {
                 Text("Save")
             }
         },
@@ -1103,6 +1192,7 @@ private fun CardioDialog(
         title = { Text("Log cardio") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                SpeechInputPlaceholder()
                 SegmentedChoices(
                     values = listOf("Cycling", "Running", "Walking"),
                     selected = type,
@@ -1131,7 +1221,7 @@ private fun CardioDialog(
                 OutlinedTextField(
                     value = notes,
                     onValueChange = { notes = it },
-                    label = { Text("Notes optional") },
+                    label = { Text("Other / notes") },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
@@ -1166,6 +1256,7 @@ private fun BatchDialog(
         title = { Text("Add cooked batch") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                SpeechInputPlaceholder()
                 OutlinedTextField(
                     value = dish,
                     onValueChange = { dish = it },
@@ -1184,7 +1275,7 @@ private fun BatchDialog(
                 OutlinedTextField(
                     value = plannedFor,
                     onValueChange = { plannedFor = it },
-                    label = { Text("Planned for") },
+                    label = { Text("Other / planned for") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -1264,4 +1355,13 @@ private fun String.onlyCompactInput(): String = filter { it.isLetterOrDigit() ||
 
 private fun String.titleCase(): String = replaceFirstChar {
     if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+}
+
+private fun buildMealDescription(
+    selectedOptions: List<String>,
+    otherText: String
+): String {
+    return (selectedOptions + otherText.trim())
+        .filter { it.isNotBlank() }
+        .joinToString(", ")
 }

@@ -369,7 +369,9 @@ Other names considered:
 - Milestone 2 local manual logging exists for Today, Fitness, Diet, Plan, and Stats.
 - Room stores meal logs, gym exercise logs, cardio sessions, and cooked batches locally.
 - Diet logs can be added by meal section and deleted.
+- Diet logging now opens a quick checkbox-based dialog with common foods for that meal section, an "Other / notes" text field at the bottom, and a nonfunctional speech placeholder.
 - Cardio logs can be added manually with estimated burn and deleted.
+- Cardio and cooked batch dialogs also show a nonfunctional speech placeholder for the future voice path.
 - Gym Strength A/B draft checklists can be saved and deleted.
 - Cooked batches can be added and deleted.
 - Simple estimators calculate rough calories/protein from known food keywords and cardio burn from MET-style estimates.
